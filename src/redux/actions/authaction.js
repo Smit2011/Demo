@@ -12,6 +12,12 @@ import {
 
 export const login = () => async (dispatch) => {
   try {
+    if (!auth) {
+      throw new Error(
+        "Firebase login is not configured. Add the Firebase environment variables and restart the app."
+      );
+    }
+
     dispatch({
       type: LOGIN_REQ,
     });
@@ -20,7 +26,11 @@ export const login = () => async (dispatch) => {
     
     const res = await auth.signInWithPopup(provider);
 
-    const accessToken = res.credential.accessToken;
+    const accessToken = res.credential?.accessToken;
+
+    if (!accessToken || !res.additionalUserInfo?.profile) {
+      throw new Error("Google login did not return a valid user profile.");
+    }
 
     const profile = {
       name: res.additionalUserInfo.profile.name,
@@ -41,18 +51,24 @@ export const login = () => async (dispatch) => {
       type: LOAD_PROF,
       payload: profile,
     });
+
+    return { success: true };
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
       payload: error.message,
     });
+
+    return { success: false, error: error.message };
   }
 };
 
 
 export const logout = () => async dispatch =>{
 
-    await auth.signOut()
+    if (auth) {
+      await auth.signOut()
+    }
 
     dispatch({
         type: LOGOUT

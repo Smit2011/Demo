@@ -26,9 +26,14 @@ const Navbar = ({ notifyMsg }) => {
     }
   }, [isLoggedIn, user, notifyMsg]);
 
-  const handleLogin = () => {
-    dispatch(login());
-    setIsLoggedIn(true);
+  const handleLogin = async () => {
+    const result = await dispatch(login());
+
+    if (result?.success) {
+      setIsLoggedIn(true);
+    } else if (result?.error) {
+      notifyMsg("error", result.error);
+    }
   };
 
   const handleLogout = () => {

@@ -11,10 +11,20 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-firebase.initializeApp(firebaseConfig);
+const isFirebaseConfigured = Boolean(
+  firebaseConfig.apiKey &&
+    firebaseConfig.messagingSenderId &&
+    firebaseConfig.appId
+);
 
-const auth = firebase.auth();
-const db = firebase.firestore();
+let auth = null;
+let db = null;
 
-export { firebase, auth, db};
+if (isFirebaseConfigured) {
+  firebase.initializeApp(firebaseConfig);
+  auth = firebase.auth();
+  db = firebase.firestore();
+}
+
+export { firebase, auth, db, isFirebaseConfigured };
 
