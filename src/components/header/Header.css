@@ -41,6 +41,13 @@
 .signlang__header-image img {
     width: 500px;
     height: 500px;
+    object-fit: contain;
+}
+
+.signlang__header-image a {
+    align-self: flex-end;
+    color: var(--color-text);
+    font-size: 12px;
 }
 
 @media screen and (max-width: 1050px) {

@@ -1,12 +1,12 @@
 import React from 'react'
 import "./Working.css"
-import WorkingImg from "../../assests/Working.png";
+import { SIGN_ASSET_URL } from "../../data/SignImageData";
 
 const Working = () => {
   return (
     <div className='signlang_working section__padding'>
         <div className="signlang_working-img">
-          <img src={WorkingImg} alt="working" />
+          <img src={SIGN_ASSET_URL} alt="ASL hand-sign alphabet reference" />
         </div>
 
         <div className="signlang_working-content">

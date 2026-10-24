@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Header.css"
-import SignHand from "../../assests/SignHand.png";
+import { SIGN_ASSET_URL, SIGN_ASSET_SOURCE } from "../../data/SignImageData";
 
 const Header = () => {
   return (
@@ -14,7 +14,8 @@ const Header = () => {
 
     </div>
     <div className="signlang__header-image">
-      <img src={SignHand} alt='SIGN-HAND'/>
+      <img src={SIGN_ASSET_URL} alt='ASL alphabet hand signs' />
+      <a href={SIGN_ASSET_SOURCE} target="_blank" rel="noreferrer">ASL alphabet source</a>
     </div>
   </div>
   )

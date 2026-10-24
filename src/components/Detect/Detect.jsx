@@ -15,8 +15,9 @@ import { SignImageData } from "../../data/SignImageData";
 import { useDispatch, useSelector } from "react-redux";
 import { addSignData } from "../../redux/actions/signdataaction";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import Sentences from "../Sentences/Sentences";
 
-import DisplayImg from "../../assests/displayGif.gif";
+import { SIGN_ASSET_URL } from "../../data/SignImageData";
 
 let startTime = "";
 
@@ -255,11 +256,11 @@ const Detect = () => {
             </div>
 
             <div className="signlang_imagelist-container">
-              <h2 className="gradient__text">Image</h2>
+              <h2 className="gradient__text">ASL alphabet reference</h2>
 
               <div className="signlang_image-div">
                 {currentImage ? (
-                  <img src={currentImage.url} alt={`img ${currentImage.id}`} />
+                  <img src={currentImage.url} alt={currentImage.name} />
                 ) : (
                   <h3 className="gradient__text">
                     Click on the Start Button <br /> to practice with Images
@@ -273,13 +274,14 @@ const Detect = () => {
           <div className="signlang_detection_notLoggedIn">
 
              <h1 className="gradient__text">Please Login !</h1>
-             <img src={DisplayImg} alt="diplay-img"/>
+             <img src={SIGN_ASSET_URL} alt="ASL alphabet hand signs"/>
              <p>
               We Save Your Detection Data to show your progress and learning in dashboard, So please Login to Test this Detection Feature.
              </p>
           </div>
         )}
       </div>
+      {accessToken ? <Sentences /> : null}
     </>
   );
 };
